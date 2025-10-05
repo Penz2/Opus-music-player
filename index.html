@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">      
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <title>Music player</title>
+</head>
+
+<body>
+  <h1>My Music Player</h1>
+  <input id="q" placeholder="Search tracks or artist " />
+  <button id="search">Search</button>
+
+    <div id="results"></div>
+
+    <div class="controls">
+        <button id="playpause">Play/Pause</button>
+        <button id="next">Next</button>
+        <label>Volume <input id="Volume" type="range" min="0" max="1" step="0.01" value="1"></label>
+    </div>
+
+    <audio id="audio" preload="metadata" controls></audio>
+
+    <script>
+  const resultsEl = document.getElementById('results');
+  const audio = document.getElementById('audio');
+  let playlist = [];
+  let current = -1;
+
+  document.getElementById('search').addEventListener('click', async () => {
+      const q = document.getElementById('q').value.trim();
+      if (!q) return alert('Type something');
+      resultsEl.innerHTML = 'Searching...';
+      try {
+          const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
+          const json = await res.json();
+          playlist = json.data || [];
+          renderList();
+      } catch(e) {
+          resultsEl.innerHTML = 'Error fetching';
+          console.error(e);
+      }
+  });
+
+  function renderList() {
+      resultsEl.innerHTML = '';
+      playlist.forEach((track, i) => {
+          const div = document.createElement('div');
+          div.className = 'track';
+          div.innerHTML = `
+              <img src="${track.album.cover_small}" width="48" height="48">
+              <div><strong>${track.title}</strong></div>
+              <div style="font-size:0.9em;color:#555">${track.artist.name} - ${track.album.title}</div>
+          `;
+          div.addEventListener('click', () => playTrack(i));
+          resultsEl.appendChild(div);
+      });
+  }
+
+  function playTrack(idx) {
+      current = idx;
+      const track = playlist[idx];
+      audio.src = track.preview;
+      audio.play();
+  }
+
+  document.getElementById('playpause').addEventListener('click', () => {
+      if (audio.paused) audio.play(); else audio.pause();
+  });
+
+  document.getElementById('next').addEventListener('click', () => {
+      if (playlist.length === 0) return;
+      current = (current + 1) % playlist.length;
+      playTrack(current);
+  }); 
+
+  document.getElementById('Volume').addEventListener('input', (e) => {
+      audio.volume = e.target.value;
+  });
+
+    </script>
+</body>
+</html>
