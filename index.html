@@ -10,17 +10,22 @@
 
 <body>
   <div class="wrap">
-    <header>
-      <h1>Welcome t Opus music player.</h1>
+  <!-- header with signup -->
+<header>
+  <h1>Opus — My Music Player</h1>
 
-      <div class="signup" id="signup-wrap">
-        <form id="signup-form">
-          <input id="name-input" placeholder="Your name" />
-          <button type="submit">Save</button>
-        </form>
-        <div id="welcome-msg" class="welcome" style="display:none;"></div>
-      </div>
-    </header>
+  <div class="signup" id="signup-wrap">
+    <!-- When not signed in this link shows -->
+    <a id="signup-link" href="signup.html" class="btn" style="text-decoration:none; padding:8px 10px; background:var(--accent); color:#fff; border-radius:6px;">Sign Up</a>
+
+    <!-- When signed in we show welcome text and sign out -->
+    <div id="welcome-area" style="display:none; align-items:center; gap:10px;">
+      <div id="welcome-msg" class="welcome"></div>
+      <button id="signout-btn" class="btn" style="background:#f3f4f6; color:#111; padding:8px 10px; border-radius:6px;">Sign out</button>
+    </div>
+  </div>
+</header>
+
 
     <!-- search -->
     <div class="search-row">
