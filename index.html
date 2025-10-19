@@ -1,86 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">      
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
-    <title>Music player</title>
+    <title> Opus music-player</title>
 </head>
 
 <body>
-  <h1>My Music Player</h1>
-  <input id="q" placeholder="Search tracks or artist " />
-  <button id="search">Search</button>
+  <div class="wrap">
+    <header>
+      <h1>Welcome t Opus music player.</h1>
 
-    <div id="results"></div>
+      <div class="signup" id="signup-wrap">
+        <form id="signup-form">
+          <input id="name-input" placeholder="Your name" />
+          <button type="submit">Save</button>
+        </form>
+        <div id="welcome-msg" class="welcome" style="display:none;"></div>
+      </div>
+    </header>
 
-    <div class="controls">
-        <button id="playpause">Play/Pause</button>
-        <button id="next">Next</button>
-        <label>Volume <input id="Volume" type="range" min="0" max="1" step="0.01" value="1"></label>
+    <!-- search -->
+    <div class="search-row">
+      <input id="search-input" placeholder="Search for your favourite song" />
+      <button id="search-btn">Search</button>
+    </div>
+    <div id="search-feedback" class="muted" style="margin-bottom:10px;"></div>
+
+    <!-- results + player -->
+    <div class="main-grid">
+
+      <!-- results -->
+      <div>
+        <div id="results"></div>
+        <p id="no-results" class="muted" style="display:none; margin-top:12px;">No tracks found.</p>
+      </div>
+
+      <!-- player -->
+      <aside class="player" id="player">
+        <img id="song-cover" class="cover-large" src="https://via.placeholder.com/600x400?text=No+Track" alt="cover" />
+        <div class="center">
+          <p class="title" id="player-title">Select a track</p>
+          <p class="artist" id="player-artist">Artist</p>
+          <p class="muted" id="player-album">Album</p>
+        </div>
+
+        <!-- hidden audio element -->
+        <audio id="audio"></audio>
+
+        <!-- controls -->
+        <div class="controls">
+          <button class="btn" id="prev-btn">Backward</button>
+          <button class="btn primary" id="play-btn">Play</button>
+          <button class="btn" id="next-btn">Forward</button>
+        </div>
+
+        <!-- progress & time -->
+        <div class="time-row">
+          <span id="time-current">0:00</span>
+          <input id="progress" class="progress" type="range" min="0" max="100" value="0" />
+          <span id="time-total">0:30</span>
+        </div>
+
+        <!-- volume -->
+        <div class="volume-row">
+          <label for="volume">Volume</label>
+          <input id="volume" type="range" min="0" max="1" step="0.01" value="0.8" />
+        </div>
+
+        <div id="error-msg" class="error" style="margin-top:8px;"></div>
+      </aside>
     </div>
 
-    <audio id="audio" preload="metadata" controls></audio>
+    <footer>Uses Deezer preview clips via JSONP.</footer>
+  </div>
 
-    <script>
-  const resultsEl = document.getElementById('results');
-  const audio = document.getElementById('audio');
-  let playlist = [];
-  let current = -1;
-
-  document.getElementById('search').addEventListener('click', async () => {
-      const q = document.getElementById('q').value.trim();
-      if (!q) return alert('Type something');
-      resultsEl.innerHTML = 'Searching...';
-      try {
-          const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
-          const json = await res.json();
-          playlist = json.data || [];
-          renderList();
-      } catch(e) {
-          resultsEl.innerHTML = 'Error fetching';
-          console.error(e);
-      }
-  });
-
-  function renderList() {
-      resultsEl.innerHTML = '';
-      playlist.forEach((track, i) => {
-          const div = document.createElement('div');
-          div.className = 'track';
-          div.innerHTML = `
-              <img src="${track.album.cover_small}" width="48" height="48">
-              <div><strong>${track.title}</strong></div>
-              <div style="font-size:0.9em;color:#555">${track.artist.name} - ${track.album.title}</div>
-          `;
-          div.addEventListener('click', () => playTrack(i));
-          resultsEl.appendChild(div);
-      });
-  }
-
-  function playTrack(idx) {
-      current = idx;
-      const track = playlist[idx];
-      audio.src = track.preview;
-      audio.play();
-  }
-
-  document.getElementById('playpause').addEventListener('click', () => {
-      if (audio.paused) audio.play(); else audio.pause();
-  });
-
-  document.getElementById('next').addEventListener('click', () => {
-      if (playlist.length === 0) return;
-      current = (current + 1) % playlist.length;
-      playTrack(current);
-  }); 
-
-  document.getElementById('Volume').addEventListener('input', (e) => {
-      audio.volume = e.target.value;
-  });
-
-    </script>
+  <script src="js/script.js"></script>
 </body>
 </html>
