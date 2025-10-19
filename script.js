@@ -41,7 +41,7 @@ function initSignupDisplay(){
 
     if (signupLink) signupLink.style.display = 'none';
     if (welcomeArea) welcomeArea.style.display = 'flex';
-    if (welcomeMsg) welcomeMsg.textContent = 'Welcome, ' + saved + ' 👋';
+    if (welcomeMsg) welcomeMsg.textContent = 'Welcome, ' + saved + '';
   } else {
 
     if (signupLink) signupLink.style.display = 'inline-block';
