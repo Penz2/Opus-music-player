@@ -12,6 +12,7 @@ html,body {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
     background: var(--bg); color:#111827; 
 }
+
 .wrap {
      max-width: 1100px; 
      margin: 24px auto; 
@@ -60,8 +61,60 @@ header h1 {
     font-size: 0.9rem; 
 }
 
-/* signup/login card */
+/* --- Welcome Area --- */
+.welcome-area {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+}
 
+.welcome-area .welcome {
+  font-weight: 500;
+  color: var(--text, #111);
+  font-size: 0.95rem;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn.primary,
+.btn.accent {
+  background: var(--accent, #007bff);
+  color: #fff;
+}
+
+.btn.primary:hover,
+.btn.accent:hover {
+  background: var(--accent-hover, #0063cc);
+}
+
+.signout-btn {
+  background: #f3f4f6;
+  color: #111;
+}
+
+.signout-btn:hover {
+  background: #e5e7eb;
+}
+
+/* Optional small screen tweak */
+@media (max-width: 600px) {
+  .welcome-area {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+
+/* signup/login card */
 .center-card {
   min-height: 80vh;
   display: flex;
@@ -96,7 +149,10 @@ form {
   text-align: left;
 }
 
-label { font-size: 0.9rem; }
+label { 
+    font-size: 0.9rem; 
+}
+
 input[type="text"],
 input[type="password"] {
   width: 100%;
@@ -129,16 +185,25 @@ button[type="submit"] {
     margin-top: 4px; 
     color: #555; 
 }
+
 .feedback.error { 
     color: #c03535; 
 }
+
 .small { 
     margin-top: 10px; 
     text-align: center; 
 }
+
 .small a { 
     color: #222; 
     text-decoration: underline; 
+}
+
+#welcome-area { 
+    display: none; 
+    align-items: center; 
+    gap: 10px; 
 }
 
 
@@ -148,12 +213,14 @@ button[type="submit"] {
     gap: 8px; 
     margin-bottom: 16px; 
 }
+
 .search-row input { 
     flex:1; 
     padding: 10px 12px; 
     border-radius: 8px; 
     border: 1px solid #d1d5db; 
 }
+
 .search-row button { 
     padding: 10px 14px; 
     border-radius: 8px; 
@@ -169,6 +236,7 @@ button[type="submit"] {
     grid-template-columns: 1fr 320px; gap:18px; 
     align-items: start; 
 }
+
 @media (max-width:900px){ 
     .main-grid { grid-template-columns: 1fr; } 
 }
@@ -179,6 +247,7 @@ button[type="submit"] {
     grid-template-columns: repeat(2, 1fr); 
     gap: 12px; 
 }
+
 @media (max-width:600px){ 
     #results { grid-template-columns: 1fr; } 
 }
@@ -191,10 +260,12 @@ button[type="submit"] {
   cursor: pointer;
   transition: transform .14s ease, box-shadow .14s ease;
 }
+
 .card:hover { 
     transform: translateY(-4px); 
     box-shadow: 0 12px 28px rgba(15,23,42,0.08); 
 }
+
 .cover { 
     width: 100%; 
     height: 140px; object-fit:cover; 
@@ -202,11 +273,13 @@ button[type="submit"] {
     display: block; 
     margin-bottom: 8px; 
 }
+
 .meta { 
     font-size: 0.95rem; 
     margin: 0 0 6px 0; 
     font-weight: 600; 
 }
+
 .submeta { 
     color: var(--muted); 
     font-size: 0.85rem; 
@@ -222,6 +295,7 @@ button[type="submit"] {
   position: sticky; 
   top: 18px;
 }
+
 .player .cover-large { 
     width: 100%; 
     height: 260px; 
@@ -230,6 +304,7 @@ button[type="submit"] {
     display: block; 
     margin-bottom: 12px; 
 }
+
 .center { 
     text-align: center; 
 }
@@ -239,6 +314,7 @@ button[type="submit"] {
     font-weight: 700; 
     margin: 0; 
 }
+
 .artist { 
     color: var(--muted); 
     margin: 6px 0 0 0; 
@@ -253,6 +329,7 @@ button[type="submit"] {
     align-items: center; 
     margin-top: 10px; 
 }
+
 .btn { 
     padding: 8px 12px; 
     border-radius: 8px; 
@@ -261,10 +338,12 @@ button[type="submit"] {
     cursor: pointer; 
     font-weight: 600; 
 }
+
 .btn.primary { 
     background: var(--accent); 
     color: white; 
 }
+
 .time-row { 
     display: flex; 
     gap:8px; align-items:center; 
@@ -272,6 +351,7 @@ button[type="submit"] {
     font-size: 0.9rem; 
     color: var(--muted); 
 }
+
 .progress { 
     width:100%; 
 }
@@ -285,6 +365,7 @@ button[type="submit"] {
     color: var(--muted); 
     font-size: 0.9rem; 
 }
+
 input[type="range"] {
      -webkit-appearance: none; 
      appearance: none; 
@@ -292,6 +373,7 @@ input[type="range"] {
      background: #e6e7eb; 
      border-radius: 6px; 
 }
+
 input[type="range"]::-webkit-slider-thumb {
      -webkit-appearance: none; 
      width: 14px; 
@@ -306,6 +388,7 @@ input[type="range"]::-webkit-slider-thumb {
     color: var(--muted); 
     font-size: 0.95rem; 
 }
+
 .error { 
     color: #b91c1c; 
     font-size: 0.95rem; 
