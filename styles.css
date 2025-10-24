@@ -60,6 +60,88 @@ header h1 {
     font-size: 0.9rem; 
 }
 
+/* signup/login card */
+
+.center-card {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.card {
+  width: 420px;
+  max-width: 90%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  padding: 2rem;
+  text-align: center;
+}
+
+.card h1 { 
+    margin: 0 0 8px; 
+    font-size: 1.5rem; 
+}
+
+.card p { 
+    margin: 0 0 16px; 
+    color: #333; 
+}
+
+form {
+  display: grid;
+  gap: 10px;
+  text-align: left;
+}
+
+label { font-size: 0.9rem; }
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d6d6d6;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input:focus {
+  border-color: #8aa7ff;
+  box-shadow: 0 0 0 4px rgba(138,167,255,0.12);
+}
+
+button[type="submit"] {
+  margin-top: 6px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: #2d6cdf;
+  color: white;
+}
+
+.feedback { 
+    font-size: 0.85rem; 
+    margin-top: 4px; 
+    color: #555; 
+}
+.feedback.error { 
+    color: #c03535; 
+}
+.small { 
+    margin-top: 10px; 
+    text-align: center; 
+}
+.small a { 
+    color: #222; 
+    text-decoration: underline; 
+}
+
+
 /* Search */
 .search-row { 
     display: flex; 

@@ -3,34 +3,41 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sign Up — Opus</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    /* small overrides for the signup page */
-    .signup-card { max-width:420px; margin:80px auto; background:var(--card); padding:22px; border-radius:10px; box-shadow:0 8px 28px rgba(0,0,0,0.06); text-align:center; }
-    .signup-card input { width:100%; padding:10px 12px; margin-bottom:12px; border-radius:8px; border:1px solid #ddd; }
-    .signup-card button { padding:10px 14px; border-radius:8px; border:none; background:var(--accent); color:white; cursor:pointer; }
-    .back-link { display:inline-block; margin-top:12px; color:var(--muted); text-decoration:underline; cursor:pointer; }
-  </style>
+  <title>Opus — Sign Up</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="wrap">
-    <div class="signup-card" role="main" aria-labelledby="signup-title">
-      <h2 id="signup-title">Welcome to Opus</h2>
-      <p class="muted">Enter a display name to personalize your experience.</p>
+  <main class="center-card">
+    <div class="card">
+      <h1>Welcome to Opus</h1>
+      <p>Enter your details to create an account.</p>
 
-      <form id="signup-form-local">
-        <input id="signup-name" type="text" placeholder="Your display name" aria-label="Your name" required />
-        <br />
-        <button type="submit">Save & Go to Player</button>
+      <form id="signupForm" novalidate>
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="username" required />
+
+        <label for="displayName">Display name</label>
+        <input id="displayName" name="displayName" type="text" placeholder="Your display name" required />
+
+        <label for="password">Create password</label>
+        <input id="password" name="password" type="password" placeholder="Create password" required minlength="6" />
+
+        <label for="confirmPassword">Confirm password</label>
+        <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" required minlength="6" />
+
+        <div id="pwFeedback" class="feedback"></div>
+        <div id="formError" class="feedback error"></div>
+
+        <button id="signupBtn" type="submit">Create account</button>
       </form>
 
-      <div style="margin-top:10px;">
-        <a class="back-link" href="index.html">Back to Player (skip)</a>
-      </div>
+      <p class="small">
+        <a href="index.html">Back to Player (skip)</a>
+      </p>
     </div>
-  </div>
+  </main>
 
-  <script src="js/signup.js"></script>
+  <script src="signup.js"></script>
 </body>
 </html>
+
